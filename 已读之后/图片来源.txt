@@ -1,0 +1,79 @@
+真实摄影来源｜已读之后
+
+均为场景配图，非企业案例现场、研究参与者或人物真实经历。摄影配图未使用AI生成插图。
+Pexels License：https://www.pexels.com/license/
+
+night｜Tima Miroshnichenko
+https://www.pexels.com/photo/man-working-in-the-office-6615073/
+本地：assets/images/night.jpg
+尺寸：[1800, 2701]
+
+phone｜cottonbro studio
+https://www.pexels.com/photo/woman-in-white-pajamas-using-phone-before-sleeping-6940877/
+本地：assets/images/phone.jpg
+尺寸：[1800, 1200]
+
+team｜fauxels
+https://www.pexels.com/photo/photo-of-people-standing-while-discussing-3182772/
+本地：assets/images/team.jpg
+尺寸：[1800, 1200]
+
+table｜fauxels
+https://www.pexels.com/photo/man-wearing-brown-suit-jacket-3184339/
+本地：assets/images/table.jpg
+尺寸：[1800, 1200]
+
+discussion｜fauxels
+https://www.pexels.com/photo/photo-of-people-near-computer-3182742/
+本地：assets/images/discussion.jpg
+尺寸：[1800, 1200]
+
+senior｜cottonbro studio
+https://www.pexels.com/photo/woman-sitting-in-front-of-a-laptop-at-the-office-5971244/
+本地：assets/images/senior.jpg
+尺寸：[1800, 2700]
+
+mentoring｜Kampus Production
+https://www.pexels.com/photo/a-man-and-a-woman-using-a-laptop-together-7551644/
+本地：assets/images/mentoring.jpg
+尺寸：[1800, 1200]
+
+handshake｜fauxels
+https://www.pexels.com/photo/photo-of-woman-handshaking-with-another-person-3182816/
+本地：assets/images/handshake.jpg
+尺寸：[1800, 2697]
+
+work｜Tima Miroshnichenko
+https://www.pexels.com/photo/a-man-working-in-the-office-6615044/
+本地：assets/images/work.jpg
+尺寸：[1800, 1200]
+
+senior-work｜Ivan S
+https://www.pexels.com/photo/an-elderly-woman-using-laptop-inside-the-office-7394566/
+本地：assets/images/senior-work.jpg
+尺寸：[1800, 1200]
+
+avatar-manager｜RDNE Stock project
+https://www.pexels.com/photo/a-happy-man-sitting-at-an-office-7845165/
+本地：assets/avatars/manager.jpg
+尺寸：[360, 360]
+第2、3、14页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
+
+avatar-employee｜Bùi Hoàng Long
+https://www.pexels.com/photo/portrait-of-a-young-man-in-a-blue-shirt-17503456/
+本地：assets/avatars/employee.jpg
+尺寸：[360, 360]
+第3、14页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
+
+第3页飞书私聊为HTML情境示意，消息使用小组讨论原文，并非实际聊天截图。界面与已读状态参考飞书官方帮助中心：
+https://www.feishu.cn/hc/zh-CN/articles/360045201453-查看消息的发送和阅读状态?slug=true
+https://www.feishu.cn/hc/zh-CN/articles/360045255773-即时消息常见问题
+
+
+Duo 界面参考｜第3页为HTML/CSS设备造型，按用户要求固定高宽比1.41:1。
+https://developer.apple.com/design/human-interface-guidelines/designing-for-iphone-duo
+https://www.apple.com/iphone-duo/specs/
+
+玩梗贴纸（非配图体系）
+第 2、4、6、10、11、15、20、21、23、25、33、34、35 页另有 13 张“奶家人”表情包贴纸，应小组聊天中的玩梗要求加入，仅作留白处的表情使用，不配说明文字，不参与论证，不表示研究、企业案例或人物经历。
+图片由组员在小组聊天中提供，原始作者与授权未能核实；正式公开传播前应替换或补充授权。它们不从属于上列 Pexels 摄影配图。

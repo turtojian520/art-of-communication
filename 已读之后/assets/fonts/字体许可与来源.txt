@@ -1,0 +1,5 @@
+Noto Serif SC / Noto Sans SC
+Google Fonts · SIL Open Font License 1.1
+来源：https://github.com/google/fonts/tree/main/ofl/notoserifsc
+来源：https://github.com/google/fonts/tree/main/ofl/notosanssc
+本目录woff为本演示字符子集；HTML内嵌同一字体。

@@ -1,0 +1,9 @@
+# 构建缓存与参考仓库（不随成品提交）
+.build/
+.references/
+__pycache__/
+
+# 本机/打包产物
+*.zip
+.DS_Store
+Thumbs.db
