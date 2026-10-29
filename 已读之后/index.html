@@ -32,7 +32,7 @@
 <aside class="side-stack"><section class="side-panel"><h3>当前放映画面</h3><div class="live-preview"><iframe id="livePreview" title="当前幻灯片预览" tabindex="-1"></iframe></div><div class="preview-caption"><span id="previewStatus">本机预览</span><span id="previewNumber"></span></div><div class="next-panel"><span class="next-number" id="nextNumber"></span><div><p>下一页</p><strong id="nextTitle"></strong></div></div></section>
 <section class="side-panel"><h3 id="partSummaryTitle">本部分讲什么</h3><ul class="part-summary" id="partSummary"></ul><select class="part-jump" id="partJump" aria-label="跳到某部分"></select></section>
 <section class="side-panel screen-panel"><h3>放映屏幕</h3><div class="screen-control"><select id="presenterScreen" aria-label="选择放映显示器"><option value="">浏览器默认位置 / 手动拖动</option></select><button class="quiet" id="presenterDetectScreens">识别扩展屏</button><button class="quiet" id="audienceFullscreen">放映屏全屏</button><button class="quiet" id="fillScreen" title="系统全屏不可用时，把窗口铺满所选显示器">铺满屏幕</button></div><p class="screen-hint" id="presenterScreenHint">选择扩展屏后，放映窗口会自动移过去并全屏；也支持手动拖动放映窗口。</p><p class="screen-hint">Chrome / Edge 支持自动放置。macOS 用“扩展显示”，Windows 按 Win+P 选择“扩展”；首次全屏点“放映屏全屏”或在放映窗口按一次键。若 Chrome 全屏按钮无反应（macOS 27 已知问题），用“铺满屏幕”。</p></section>
-<section class="side-panel"><h3>本地视频</h3><div class="media-controls"><label class="secondary">选择视频<input id="speakerVideoFile" type="file" accept="video/*,.mp4,.webm,.mov"></label><label class="quiet">选择字幕<input id="speakerCaptionFile" type="file" accept=".vtt,text/vtt"></label><button class="secondary" id="presetClosingVideo" title="从仓库的 ../closing-video/ 载入结尾视频和中文字幕">载入结尾视频</button></div><p class="media-status" id="mediaStatus">选择文件后，在这里控制扩展屏播放。</p><div class="media-controls"><button class="secondary" id="mediaPlay">播放</button><button class="quiet" id="mediaPause">暂停</button><button class="quiet" id="mediaClose">返回幻灯片</button></div><div class="media-time"><span id="mediaTime">00:00</span><span id="mediaDuration">00:00</span></div><input class="media-seek" id="mediaSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="视频播放进度"></section></aside></div>
+<section class="side-panel"><h3>本地视频</h3><div class="media-controls"><label class="secondary">选择视频<input id="speakerVideoFile" type="file" accept="video/*,.mp4,.webm,.mov"></label><label class="quiet">选择字幕<input id="speakerCaptionFile" type="file" accept=".vtt,text/vtt"></label><button class="secondary" id="presetClosingVideo" title="从仓库的 ../closing-video/ 载入结尾视频和中文字幕">载入结尾视频</button><button class="secondary" id="presetPart2Video" title="从仓库的 ../part2-video/ 载入第二部分视频（李宗恒《准时下班！》，片内已带中文字幕）">载入第二部分视频</button></div><p class="media-status" id="mediaStatus">选择文件后，在这里控制扩展屏播放。</p><div class="media-controls"><button class="secondary" id="mediaPlay">播放</button><button class="quiet" id="mediaPause">暂停</button><button class="quiet" id="mediaClose">返回幻灯片</button></div><div class="media-time"><span id="mediaTime">00:00</span><span id="mediaDuration">00:00</span></div><input class="media-seek" id="mediaSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="视频播放进度"></section></aside></div>
 <p class="connection-hint" id="connectionHint">方向键 / 空格翻页。放映屏上的翻页也会同步回控制台。</p>
 <footer class="speaker-navigation"><div><button class="secondary" id="speakerPrev">← 上一页</button><button class="primary" id="speakerNext">下一页 →</button><span class="navigation-hint">← → / 空格</span></div><div><span class="timer" id="elapsedTime">00:00</span><button class="quiet" id="timerToggle">开始计时</button><button class="quiet" id="blackoutToggle">黑屏</button><button class="quiet" id="stopAudience">结束放映</button></div></footer></main>
 
@@ -183,7 +183,7 @@
   const session=params.get('session')||uuid();params.set('view','presenter');params.set('session',session);history.replaceState(null,'',location.pathname+'?'+params);
   let state={index:Math.max(0,Math.min(pages.length-1,(Number(params.get('start'))||1)-1)),beat:0,max:0,blackout:false,changing:false,media:{},screen:null};
   let autoTarget=urlTarget();
-  let audience=null,audienceReady=false,previewReady=false,lastRender='',lastPreview='',videoFile=null,captionFile=null,queuedPlay=false;
+  let audience=null,audienceReady=false,previewReady=false,lastRender='',lastPreview='',videoFile=null,captionFile=null,captionCleared=false,queuedPlay=false;
   let ignoreAudience=false;
   let elapsed=0,timerStarted=0,timerRunning=false,timerTouched=false,lastPart=null;
   const preview=$('#livePreview');
@@ -261,7 +261,7 @@
     const first=!audienceReady||audience!==event.source;audience=event.source;audienceReady=true;
     if(first){
       send(audience,'team',{members:group.members});
-      if(videoFile)send(audience,'video-load',{file:videoFile});if(captionFile)send(audience,'caption-load',{file:captionFile});
+      if(videoFile)send(audience,'video-load',{file:videoFile});if(captionFile)send(audience,'caption-load',{file:captionFile});else if(videoFile&&captionCleared)send(audience,'caption-clear');
       if(autoTarget){send(audience,'place',{screen:autoTarget,fullscreen:true});focusAudienceForFullscreen();}
       else{send(audience,'fullscreen');focusAudienceForFullscreen();}
       if(params.get('autostart')&&!timerTouched&&!timerRunning)startTimer();
@@ -331,26 +331,39 @@
   function pauseTimer(){if(timerRunning)elapsed+=(performance.now()-timerStarted)/1000;timerRunning=false;$('#timerToggle').textContent='继续计时';}
   $('#timerToggle').addEventListener('click',()=>{timerTouched=true;timerRunning?pauseTimer():startTimer();});$('#elapsedTime').title='本部分计时，切换部分时自动归零';
   setInterval(()=>{$('#elapsedTime').textContent=formatTime(elapsed+(timerRunning?(performance.now()-timerStarted)/1000:0));if(audience&&audience.closed){audience=null;audienceReady=false;lastPreview='';markConnection();}},500);
-  async function loadClosingVideo(){
-    const button=$('#presetClosingVideo');if(!button||button.disabled)return;
+  /* === PRESET VIDEOS · 一键载入仓库里托管的案例片段（GitHub Pages 在线可用） === */
+  async function loadPresetVideo(buttonId,videoPath,captionPath){
+    const button=document.getElementById(buttonId);if(!button||button.disabled)return;
     button.disabled=true;const label=button.textContent;button.textContent='正在载入…';
+    const fileName=videoPath.split('/').pop(),captionName=captionPath?captionPath.split('/').pop():'';
     try{
-      const base=new URL('../closing-video/',location.href);
-      const [videoResponse,captionResponse]=await Promise.all([
-        fetch(new URL('leah-georges-closing.mp4',base)),
-        fetch(new URL('leah-georges-closing.zh.vtt',base))
-      ]);
-      if(!videoResponse.ok||!captionResponse.ok)throw new Error('HTTP '+(videoResponse.status||captionResponse.status));
-      const [videoBlob,captionBlob]=await Promise.all([videoResponse.blob(),captionResponse.blob()]);
-      videoFile=new File([videoBlob],'leah-georges-closing.mp4',{type:videoBlob.type||'video/mp4'});
-      captionFile=new File([captionBlob],'leah-georges-closing.zh.vtt',{type:captionBlob.type||'text/vtt'});
+      const videoResponse=await fetch(new URL(videoPath,location.href));
+      if(!videoResponse.ok)throw new Error('HTTP '+videoResponse.status);
+      let captionResponse=null;
+      if(captionPath){
+        captionResponse=await fetch(new URL(captionPath,location.href));
+        if(!captionResponse.ok)throw new Error('HTTP '+captionResponse.status);
+      }
+      const videoBlob=await videoResponse.blob();
+      videoFile=new File([videoBlob],fileName,{type:videoBlob.type||'video/mp4'});
+      if(captionResponse){
+        const captionBlob=await captionResponse.blob();
+        captionFile=new File([captionBlob],captionName,{type:captionBlob.type||'text/vtt'});captionCleared=false;
+      }else{
+        /* 片段自带画面字幕时清空上一段视频的字幕，避免旧字幕串到新片段上。 */
+        captionFile=null;captionCleared=true;
+      }
       /* 已连接就按现有顺序下发；未连接时交给首次连接逻辑自动补发。 */
-      if(connected()){send(audience,'video-load',{file:videoFile});send(audience,'caption-load',{file:captionFile});}
-      renderMedia();toast('结尾视频已载入，点“播放”开始。');
-    }catch(_){toast('请在 Pages 在线打开，或改用本地选择视频');}
+      if(connected()){
+        send(audience,'video-load',{file:videoFile});
+        if(captionFile)send(audience,'caption-load',{file:captionFile});else send(audience,'caption-clear');
+      }
+      renderMedia();toast((captionFile?'视频与字幕已载入':'视频已载入（片内自带走字字幕）')+'，点“播放”开始。');
+    }catch(_){toast('请在 GitHub Pages 在线打开，或改用本地选择视频');}
     finally{button.disabled=false;button.textContent=label;}
   }
-  $('#presetClosingVideo').addEventListener('click',loadClosingVideo);
+  document.getElementById('presetClosingVideo').addEventListener('click',()=>loadPresetVideo('presetClosingVideo','../closing-video/leah-georges-closing.mp4','../closing-video/leah-georges-closing.zh.vtt'));
+  document.getElementById('presetPart2Video').addEventListener('click',()=>loadPresetVideo('presetPart2Video','../part2-video/li-zongheng-zhunshi-xiaban.mp4',null));
   $('#speakerVideoFile').addEventListener('change',e=>{videoFile=e.target.files[0]||null;if(videoFile&&connected())send(audience,'video-load',{file:videoFile});renderMedia();});
   $('#speakerCaptionFile').addEventListener('change',e=>{captionFile=e.target.files[0]||null;if(captionFile&&connected())send(audience,'caption-load',{file:captionFile});});
   $('#mediaPlay').addEventListener('click',()=>{if(!videoFile&&!state.media?.loaded){toast('先选择本地视频，再点击播放。');return;}if(!connected()){queuedPlay=true;openAudience();}else send(audience,'video-play');});

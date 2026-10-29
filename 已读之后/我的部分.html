@@ -773,6 +773,10 @@ svg {
     track.kind='captions';track.srclang='zh';track.label='中文字幕';track.src=captionURL;track.default=true;video.append(track);
     toast('已加入字幕文件。');
   }
+  function clearCaption(){
+    if(captionURL)URL.revokeObjectURL(captionURL);captionURL=null;
+    video.querySelectorAll('track').forEach(t=>t.remove());
+  }
   $('#videoFile').addEventListener('change',e=>assignVideo(e.target.files[0]));
   $('#captionFile').addEventListener('change',e=>assignCaption(e.target.files[0]));
   video.addEventListener('error',()=>{if(video.getAttribute('src')){$('#videoError').hidden=false;$('#videoError').textContent='无法播放此文件。请换用浏览器支持的 MP4/H.264 文件，或关闭后继续讲解。';}});
@@ -1005,6 +1009,7 @@ svg {
     else if(m.action==='fill')fillScreen(m.screen||screenTarget);
     else if(m.action==='video-load'&&m.file instanceof Blob)assignVideo(m.file);
     else if(m.action==='caption-load'&&m.file instanceof Blob)assignCaption(m.file);
+    else if(m.action==='caption-clear')clearCaption();
     else if(m.action==='video-play')playRemoteVideo();
     else if(m.action==='video-pause')video.pause();
     else if(m.action==='video-close')closeModal();
