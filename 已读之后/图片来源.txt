@@ -57,13 +57,13 @@ avatar-manager｜RDNE Stock project
 https://www.pexels.com/photo/a-happy-man-sitting-at-an-office-7845165/
 本地：assets/avatars/manager.jpg
 尺寸：[360, 360]
-第2、3、14页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
+第2、3、13页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
 
 avatar-employee｜Bùi Hoàng Long
 https://www.pexels.com/photo/portrait-of-a-young-man-in-a-blue-shirt-17503456/
 本地：assets/avatars/employee.jpg
 尺寸：[360, 360]
-第3、14页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
+第3、13页角色头像摄影配图；人物年龄、身份均为情境设定，不代表摄影人物的真实身份与经历。
 
 第3页飞书私聊为HTML情境示意，消息使用小组讨论原文，并非实际聊天截图。界面与已读状态参考飞书官方帮助中心：
 https://www.feishu.cn/hc/zh-CN/articles/360045201453-查看消息的发送和阅读状态?slug=true
@@ -75,5 +75,5 @@ https://developer.apple.com/design/human-interface-guidelines/designing-for-ipho
 https://www.apple.com/iphone-duo/specs/
 
 玩梗贴纸（非配图体系）
-第 2、4、6、10、11、15、20、21、23、25、33、34、35 页另有 13 张“奶家人”表情包贴纸，应小组聊天中的玩梗要求加入，仅作留白处的表情使用，不配说明文字，不参与论证，不表示研究、企业案例或人物经历。
+第 2、4、5、9、10、14、19、20、22、24、32、33、34 页另有 13 张“奶家人”表情包贴纸，应小组聊天中的玩梗要求加入，仅作留白处的表情使用，不配说明文字，不参与论证，不表示研究、企业案例或人物经历。
 图片由组员在小组聊天中提供，原始作者与授权未能核实；正式公开传播前应替换或补充授权。它们不从属于上列 Pexels 摄影配图。
